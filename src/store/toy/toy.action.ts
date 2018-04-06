@@ -1,0 +1,5 @@
+
+export const TOYS = {
+  GET_TOYS: 'TOYS_GET_TOYS',
+  SELECT_TOY: 'TOYS_SELECT_TOY'
+};
