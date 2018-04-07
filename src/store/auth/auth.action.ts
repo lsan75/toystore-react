@@ -1,7 +1,7 @@
 import { Action } from 'redux';
 
 export const AUTH = {
-  SET_CONNECTED: 'AUTH.SET_CONNECTED',
+  SET_CONNECTED: 'AUTH_ET_CONNECTED',
   OPEN: 'AUTH_OPEN'
 };
 

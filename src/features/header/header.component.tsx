@@ -1,25 +1,21 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import { HeaderLink, HeaderLinkProps } from './header-link.component';
+
 import './header.css';
 
-interface Props {
-  click: () => void;
-  counter: number;
-  isConnected: boolean;
-}
-
-export function HeaderComponent(props: Props) {
-
-  const isS = () => props.counter > 1 ? 's' : '';
+export function HeaderComponent(props: HeaderLinkProps) {
 
   return (
     <header className="Header">
 
       <Link to="/" className="Header__title">ToyStore</Link>
 
-      <article className="Header__counter" onClick={props.click}>
-        Basket | {props.counter} item{isS()}
-      </article>
+      <HeaderLink
+        click={props.click}
+        isConnected={props.isConnected}
+        counter={props.counter}
+      />
 
     </header>
   );
