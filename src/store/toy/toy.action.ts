@@ -8,7 +8,8 @@ axios.defaults.baseURL = 'http://localhost:3000/';
 
 export const TOYS = {
   GET_TOYS: 'TOYS_GET_TOYS',
-  SELECT_TOY: 'TOYS_SELECT_TOY'
+  SELECT_TOY: 'TOYS_SELECT_TOY',
+  UNSELECT_ALL: 'TOYS_UNSELECT_ALL'
 };
 
 export function getToysAction() {
@@ -34,5 +35,11 @@ export function selectToyAction(toy: Toy): ToyAction {
   return {
     type: TOYS.SELECT_TOY,
     toy
+  };
+}
+
+export function unselectAllAction(): ToyAction {
+  return {
+    type: TOYS.UNSELECT_ALL
   };
 }

@@ -3,13 +3,14 @@ import { ToyListComponent } from './toy-list';
 import { Toy } from './toy';
 import { connect, Dispatch } from 'react-redux';
 import { Store } from '../../store/root';
-import { selectToyAction, getToysAction } from '../../store/toy/toy.action';
+import { selectToyAction, getToysAction, unselectAllAction } from '../../store/toy/toy.action';
 import { ToyAction } from '../../store/toy/toy.reducer';
 
 interface Props {
   toyList: Toy[];
   select: (toy: Toy) => ToyAction;
   getToys: () => ToyAction;
+  unselect: () => ToyAction;
 }
 
 export class ToyListContainer extends React.Component<Props> {
@@ -26,6 +27,7 @@ export class ToyListContainer extends React.Component<Props> {
     return (
       <ToyListComponent
         select={this.props.select}
+        unselect={this.props.unselect}
         toyList={this.props.toyList}
       />
     );
@@ -42,7 +44,8 @@ function mapStateToProps(state: Store) {
 function mapDispatchToProps(dispatch: Dispatch<Props>) {
   return {
     select: (toy: Toy) => dispatch( selectToyAction(toy) ),
-    getToys: () => dispatch( getToysAction() )
+    getToys: () => dispatch( getToysAction() ),
+    unselect: () => dispatch( unselectAllAction() )
   };
 }
 

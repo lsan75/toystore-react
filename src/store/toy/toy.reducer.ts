@@ -18,6 +18,7 @@ export const defaultToyReducer: ToyReducerState = {
 };
 
 export function toyReducer(state: ToyReducerState = defaultToyReducer, action: ToyAction) {
+  let newState: ToyReducerState;
 
   switch (action.type) {
 
@@ -25,7 +26,7 @@ export function toyReducer(state: ToyReducerState = defaultToyReducer, action: T
       return { ...state, toyList: action.toyList };
 
     case TOYS.SELECT_TOY:
-      const newState = Object.assign({}, state);
+      newState = Object.assign({}, state);
 
       newState.toyList = newState.toyList.map(toy => {
         if (toy.title === (action.toy ? action.toy.title : null)) {
@@ -37,6 +38,15 @@ export function toyReducer(state: ToyReducerState = defaultToyReducer, action: T
       const counter = newState.toyList.filter(item => item.selected).length;
 
       return Object.assign({}, state, newState, { counter });
+
+    case TOYS.UNSELECT_ALL:
+      newState = Object.assign({}, state);
+      newState.toyList = newState.toyList.map(toy => {
+        toy.selected = false;
+        return toy;
+      });
+
+      return Object.assign({}, newState, { counter: 0 });
 
     default:
       return state;

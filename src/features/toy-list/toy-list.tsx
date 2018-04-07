@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { ToyComponent, Toy } from './toy';
 import './toy-list.css';
+import '../../../node_modules/@mdi/font/css/materialdesignicons.min.css';
 
 interface Props {
   toyList: Toy[];
   select: (toy: Toy) => {};
+  unselect: () => {};
 }
 
 export function ToyListComponent(props: Props) {
@@ -14,7 +16,10 @@ export function ToyListComponent(props: Props) {
   });
 
   return (
-    <section className="ToyListComponent">{content}</section>
+    <main>
+      <section className="ToyListComponent">{content}</section>
+      <section className="ToyList__unselect mdi mdi-close-circle" onClick={props.unselect}>Unselect All</section>
+    </main>
   );
 
 }

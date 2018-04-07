@@ -11,3 +11,8 @@
     cursor: pointer;
     text-decoration: none;
   }
+  .Header__title {
+    background: url('../../logo.svg') no-repeat left center;
+    line-height: 1rem;
+    padding-left: 2rem;
+  }

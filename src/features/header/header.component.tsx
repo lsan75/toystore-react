@@ -5,6 +5,7 @@ import './header.css';
 interface Props {
   click: () => void;
   counter: number;
+  isConnected: boolean;
 }
 
 export function HeaderComponent(props: Props) {
@@ -13,10 +14,13 @@ export function HeaderComponent(props: Props) {
 
   return (
     <header className="Header">
+
       <Link to="/" className="Header__title">ToyStore</Link>
+
       <article className="Header__counter" onClick={props.click}>
         Basket | {props.counter} item{isS()}
       </article>
+
     </header>
   );
 }
