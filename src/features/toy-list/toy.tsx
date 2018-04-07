@@ -1,4 +1,6 @@
 import * as React from 'react';
+import '../../../node_modules/@mdi/font/css/materialdesignicons.min.css';
+import './toy.css';
 
 export interface Toy {
   title: string;
@@ -16,7 +18,7 @@ export function ToyComponent(props: Props) {
 
   const classname = `
     ToyComponent
-    mdi-icon-${props.toy.icon}
+    mdi mdi-${props.toy.icon}
     ${props.toy.selected ? 'selected' : ''}
   `;
 

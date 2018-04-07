@@ -1,0 +1,19 @@
+.ToyComponent {
+  background: #eee;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 3rem;
+  margin: 0 0 1rem 1rem;
+  padding: 2rem;
+  text-align: center;
+  transition: background-color 150ms ease-in-out;
+  width: 7rem;
+
+  &.selected, &.selected:hover {
+    background: rgb(235, 185, 49);
+  }
+
+  &:hover {
+    background: #fff;
+  }
+}

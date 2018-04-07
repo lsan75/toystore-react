@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ToyComponent, Toy } from './toy';
+import './toy-list.css';
 
 interface Props {
   toyList: Toy[];
@@ -9,7 +10,7 @@ interface Props {
 export function ToyListComponent(props: Props) {
 
   const content = props.toyList.map((toy: Toy) => {
-    return <ToyComponent key="toy.title" toy={toy} select={props.select} />;
+    return <ToyComponent key={toy.title} toy={toy} select={props.select} />;
   });
 
   return (

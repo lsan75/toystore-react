@@ -1,0 +1,13 @@
+.Header {
+  background: #111;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 1rem;
+}
+  .Header__title, .Header__counter {
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+  }

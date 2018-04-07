@@ -4,28 +4,42 @@ import { TOYS } from './toy.action';
 
 export interface ToyReducerState {
   toys: Toy[];
+  counter: number;
 }
 
 export interface ToyAction extends Action {
-  payload: Toy[] | Toy;
+  toys?: Toy[];
+  toy?: Toy;
 }
 
-export function toyReducer(state: ToyReducerState, action: ToyAction) {
+export const defaultToyReducer: ToyReducerState = {
+  toys: [],
+  counter: 0
+};
+
+export function toyReducer(state: ToyReducerState = defaultToyReducer, action: ToyAction) {
+
   switch (action.type) {
+
     case TOYS.GET_TOYS:
-      return { ...state, toys: action.payload };
+      return { ...state, toys: action.toys };
 
     case TOYS.SELECT_TOY:
-      let newToys = JSON.parse(JSON.stringify(state.toys));
+      const newState = Object.assign({}, state);
 
-      newToys = newToys.map((toy: Toy) => {
-        toy.selected = toy.title === action.payload.title;
+      newState.toys = newState.toys.map(toy => {
+        if (toy.title === (action.toy ? action.toy.title : null)) {
+          toy.selected = !toy.selected;
+        }
         return toy;
       });
 
-      return { ...state, newToys };
+      const counter = newState.toys.filter(item => item.selected).length;
+
+      return Object.assign({}, state, newState, { counter });
 
     default:
       return state;
+
   }
 }
