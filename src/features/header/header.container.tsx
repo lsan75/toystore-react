@@ -1,28 +1,29 @@
 import * as React from 'react';
-import * as H from 'history';
 
 import { connect } from 'react-redux';
 import { Store } from '../../store/root';
-
+import { Redirect } from 'react-router-dom';
 import { HeaderComponent } from './header.component';
 
 interface Props {
   counter: number;
 }
-
-export class HeaderContainer extends React.Component<Props> {
-
-  history: H.History;
+interface State {
+  navigate: boolean;
+}
+export class HeaderContainer extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
-  }
-
-  componentDidMount() {
-    this.history = H.createBrowserHistory();
+    this.state = { navigate: false };
   }
 
   render() {
+
+    if (this.state.navigate) {
+      this.setState(() => ({ navigate: false }));
+      return <Redirect to="/basket" push={true} />;
+    }
 
     return (
       <HeaderComponent
@@ -33,7 +34,7 @@ export class HeaderContainer extends React.Component<Props> {
   }
 
   handleClick = () => {
-    this.history.push('/basket');
+    this.setState(() => ({ navigate: true }));
   }
 }
 

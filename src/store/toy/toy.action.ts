@@ -12,7 +12,11 @@ export const TOYS = {
 };
 
 export function getToysAction() {
-  return (dispatch: Dispatch<ToyAction>) => {
+  return (dispatch: Dispatch<ToyAction>, getState: Function) => {
+
+    const store = getState();
+    if (store.toyReducer.toyList.length) { return; }
+
     axios.get('/toys').then((value: AxiosResponse<Toy[]>) => {
       dispatch(loadToysAction(value.data));
     }).catch(err => window.console.log(err));
