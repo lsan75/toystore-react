@@ -10,4 +10,7 @@
 .ToyList__unselect {
   cursor: pointer;
   padding: 0 0 0 1rem;
+  &.mdi:before {
+    padding-right: 0.5rem;
+  }
 }

@@ -1,0 +1,13 @@
+.AuthComponent {
+  background: #111;
+  display: none;
+  height: 25rem;
+  position: absolute;
+  right: 1rem;
+  top: calc(100% + 1px);
+  width: 18rem;
+  &.opened {
+    display: block;
+  }
+  z-index: 999;
+}
