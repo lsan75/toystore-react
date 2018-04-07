@@ -15,7 +15,7 @@ export function HeaderComponent(props: Props) {
     <header className="Header">
       <Link to="/" className="Header__title">ToyStore</Link>
       <article className="Header__counter" onClick={props.click}>
-        Panier | {props.counter} item{isS()}
+        Basket | {props.counter} item{isS()}
       </article>
     </header>
   );

@@ -35,7 +35,7 @@ export class ToyListContainer extends React.Component<Props> {
 
 function mapStateToProps(state: Store) {
   return {
-    toyList: state.toyReducer.toys
+    toyList: state.toyReducer.toyList
   };
 }
 

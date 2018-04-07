@@ -19,10 +19,10 @@ export function getToysAction() {
   };
 }
 
-export function loadToysAction(toys: Toy[]) {
+export function loadToysAction(toyList: Toy[]) {
   return {
     type: TOYS.GET_TOYS,
-    toys
+    toyList
   };
 }
 

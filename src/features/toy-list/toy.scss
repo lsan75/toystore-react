@@ -2,10 +2,9 @@
   background: #eee;
   cursor: pointer;
   display: inline-block;
-  font-size: 3rem;
+  height: 7rem;
   margin: 0 0 1rem 1rem;
-  padding: 2rem;
-  text-align: center;
+  position: relative;
   transition: background-color 150ms ease-in-out;
   width: 7rem;
 
@@ -17,3 +16,24 @@
     background: #fff;
   }
 }
+
+  .ToyComponent__image {
+    font-size: 3rem;
+    height: 100%;
+    padding-top: 1.7rem;
+    position: absolute;
+    left: 0;
+    text-align: center;
+    top: 0;
+    width: 100%;
+  }
+  .ToyComponent__text {
+    position: absolute;
+    padding: 0 0.4rem;
+    bottom: 0.4rem;
+    left: 0;
+    font-size: 0.7rem;
+    text-align: center;
+    text-transform: uppercase;
+    width: 100%;
+  }

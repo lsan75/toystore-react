@@ -16,17 +16,21 @@ interface Props {
 
 export function ToyComponent(props: Props) {
 
-  const classname = `
+  const component = `
     ToyComponent
-    mdi mdi-${props.toy.icon}
     ${props.toy.selected ? 'selected' : ''}
   `;
 
+  const content = `
+    ToyComponent__image
+    mdi mdi-${props.toy.icon}
+  `;
+
   return (
-    <article
-      className={classname}
-      onClick={() => props.select(props.toy)}
-    />
+    <section className={component} onClick={() => props.select(props.toy)}>
+      <article className={content} />
+      <span className="ToyComponent__text">{props.toy.title}</span>
+    </section>
   );
 
 }
