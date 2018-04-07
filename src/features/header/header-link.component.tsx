@@ -6,16 +6,15 @@ export interface HeaderLinkProps {
   click: () => void;
   isConnected: boolean;
   counter: number;
+  children: string;
 }
 
 export function HeaderLink(props: HeaderLinkProps) {
 
-  const isS = () => props.counter > 1 ? 's' : '';
-  const content = `Basket | ${props.counter} item${isS()}`;
-
   return props.isConnected ?
-    <Link className="Header__counter" to="/basket">{content}</Link>
+    <Link className="Header__counter" to="/basket">{props.children}</Link>
     :
-    <article className="Header__counter" onClick={props.click}>{content}</article>
+    <article className="Header__counter" onClick={props.click}>{props.children}</article>
   ;
+
 }
