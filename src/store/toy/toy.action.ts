@@ -18,7 +18,7 @@ export function getToysAction() {
 
     axios.get('/toys').then((value: AxiosResponse<Toy[]>) => {
       dispatch(loadToysAction(value.data));
-    }).catch(err => window.console.log(err));
+    }).catch(err => Promise.reject(err));
   };
 }
 

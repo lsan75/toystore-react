@@ -43,7 +43,7 @@ export function submitAuthAction(sentUser: UserState) {
         dispatch(setError(true));
       }
 
-    }).catch(err => window.console.log(err));
+    }).catch(err => Promise.reject(err));
 
   };
 }
