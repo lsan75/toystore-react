@@ -4,8 +4,6 @@ import axios, { AxiosResponse } from 'axios';
 import { ToyAction } from './toy.reducer';
 import { Toy } from '../../features/toy-list/toy';
 
-axios.defaults.baseURL = 'http://localhost:3000/';
-
 export const TOYS = {
   GET_TOYS: 'TOYS_GET_TOYS',
   SELECT_TOY: 'TOYS_SELECT_TOY',

@@ -2,6 +2,7 @@
   background: #151515;
   display: none;
   height: 25rem;
+  padding: 1rem;
   position: absolute;
   right: 0.5rem;
   top: 100%;
@@ -11,3 +12,59 @@
     display: block;
   }
 }
+
+.AuthForm {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+  .AuthTitle {
+    color: #fff;
+    font-weight: 300;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .AuthSection {
+    padding: 0 0 2rem;
+  }
+
+  .AuthSectionButton {
+    padding: 0 0 1rem;
+  }
+
+  .AuthLabel {
+    color: #fff;
+    display: block;
+    font-size: 0.7rem;
+    padding: 0 0 0.3rem;
+  }
+
+  .AuthInput {
+    background: none;
+    border-color: #fff;
+    border-width: 0 0 1px;
+    border-style: solid;
+    color: #fff;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    display: block;
+    width: 100%;
+    outline: none;
+  }
+
+  .AuthButton {
+    border: 1px solid #fff;
+    color: #fff;
+    cursor: pointer;
+    background: none;
+    display: block;
+    font-size: 1rem;
+    padding: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    width: 100%;
+    outline: none;
+  }

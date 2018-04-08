@@ -1,4 +1,11 @@
 {
+  "users": [
+    {
+      "id": 1,
+      "user": "toto@toto",
+      "pass": "hop"
+    }
+  ],
   "toys":  [
       {
         "title": "balloon",

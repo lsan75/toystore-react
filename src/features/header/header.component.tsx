@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { HeaderLink } from './header-link.component';
-import { AuthComponent } from '../auth/auth.component';
+import { AuthComponent, UserState } from '../auth/auth.component';
 
 interface HeaderLinkProps {
   click: () => void;
+  submit: (user: UserState) => void;
   isConnected: boolean;
   isOpened: boolean;
+  isError: boolean;
   counter: number;
 }
 
@@ -28,7 +30,12 @@ export function HeaderComponent(props: HeaderLinkProps) {
         {content}
       </HeaderLink>
 
-      <AuthComponent isOpened={props.isOpened} />
+      <AuthComponent
+        isOpened={props.isOpened}
+        isError={props.isError}
+        submit={props.submit}
+      />
     </header>
   );
+
 }
