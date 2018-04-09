@@ -16,11 +16,21 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
+"@mdi/font@^2.2.43":
+  version "2.2.43"
+  resolved "http://soleil.int-gl.com/artifactory/api/npm/npm/@mdi/font/-/font-2.2.43.tgz#087abe87be1f32e90fc07425779a7a30d1cc51ed"
+
 "@types/cheerio@*":
   version "0.22.7"
   resolved "https://registry.yarnpkg.com/@types/cheerio/-/cheerio-0.22.7.tgz#4a92eafedfb2b9f4437d3a4410006d81114c66ce"
 
-"@types/enzyme@^3.1.9":
+"@types/enzyme-adapter-react-16@^1.0.2":
+  version "1.0.2"
+  resolved "http://soleil.int-gl.com/artifactory/api/npm/npm/@types/enzyme-adapter-react-16/-/enzyme-adapter-react-16-1.0.2.tgz#15ae37c64d6221a6f4b3a4aacc357cf773859de4"
+  dependencies:
+    "@types/enzyme" "*"
+
+"@types/enzyme@*", "@types/enzyme@^3.1.9":
   version "3.1.9"
   resolved "https://registry.yarnpkg.com/@types/enzyme/-/enzyme-3.1.9.tgz#fbd97f3beb7cad76fc9c6f04c97d77f4834522ef"
   dependencies:
