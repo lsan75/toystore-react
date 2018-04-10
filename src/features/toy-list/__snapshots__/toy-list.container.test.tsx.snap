@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ToyListContainer renders without crashing 1`] = `
+<ToyListContainer
+  getToys={[Function]}
+  select={[Function]}
+  toyList={Array []}
+  unselect={[Function]}
+/>
+`;
