@@ -6,7 +6,7 @@ import { Store } from '../../store/root';
 import { selectToyAction, getToysAction, unselectAllAction } from '../../store/toy/toy.action';
 import { ToyAction } from '../../store/toy/toy.reducer';
 
-interface Props {
+export interface Props {
   toyList: Toy[];
   select: (toy: Toy) => ToyAction;
   getToys: () => ToyAction;

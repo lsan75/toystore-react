@@ -1,28 +1,51 @@
+
 import * as React from 'react';
-import { configure, shallow, ShallowRendererProps } from 'enzyme';
+import { configure, shallow, ShallowRendererProps, ShallowWrapper } from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import { shallowToJson } from 'enzyme-to-json';
-import ToyListContainer from './toy-list.container';
+import ConnectedContainer, { Props } from './toy-list.container';
 import { Provider } from 'react-redux';
-import { store } from '../../store/create.store';
+import thunk from 'redux-thunk';
+import { MockStore, MockStoreCreator } from 'redux-mock-store';
+import * as configureStore from 'redux-mock-store';
+import { Toy } from './toy';
+import { Store } from '../../store/root';
 
 configure({ adapter: new Adapter() });
 
 describe('ToyListContainer', () => {
 
+  const toy: Toy = {
+    title: 'toy',
+    icon: 'ballon',
+    price: 10
+  };
+
+  const mockStore: MockStoreCreator<Store> = configureStore<Store>([ thunk ]);
+  const store: MockStore<Store> = mockStore({
+    toyReducer: {
+      toyList: [ toy ],
+      counter: 0
+    },
+    authReducer: {
+      isConnected: false,
+      isOpened: false,
+      isError: false
+    }
+  });
   const props: ShallowRendererProps = {
     context: { store }
   };
 
   it('renders without crashing', () => {
-    const output = shallow(
+    const output: ShallowWrapper<Props> = shallow<Props>(
       <Provider store={store}>
-        <ToyListContainer />
+        <ConnectedContainer />
       </Provider>
     ).dive(props);
 
     expect(shallowToJson(output)).toMatchSnapshot();
-
+    expect(output.props().toyList).toEqual([ toy ]);
   });
 
 });

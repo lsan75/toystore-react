@@ -4,7 +4,15 @@ exports[`ToyListContainer renders without crashing 1`] = `
 <ToyListContainer
   getToys={[Function]}
   select={[Function]}
-  toyList={Array []}
+  toyList={
+    Array [
+      Object {
+        "icon": "ballon",
+        "price": 10,
+        "title": "toy",
+      },
+    ]
+  }
   unselect={[Function]}
 />
 `;
