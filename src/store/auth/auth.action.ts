@@ -34,7 +34,7 @@ export function submitAuthAction(sentUser: UserState) {
 
     let { user = '', pass = '' } = { ...sentUser };
 
-    axios.get(`/users?user=${user}&pass=${pass}`).then((result: AxiosResponse<UserState[]>) => {
+    return axios.get(`/users?user=${user}&pass=${pass}`).then((result: AxiosResponse<UserState[]>) => {
 
       if (result.data.length) {
         dispatch(authConnectAction());
