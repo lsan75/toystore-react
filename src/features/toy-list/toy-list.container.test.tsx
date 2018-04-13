@@ -44,8 +44,11 @@ describe('ToyListContainer', () => {
       </Provider>
     ).dive(props);
 
+    const innerProps: Props = output.props();
+
     expect(shallowToJson(output)).toMatchSnapshot();
-    expect(output.props().toyList).toEqual([ toy ]);
+    expect(innerProps.toyList).toEqual([ toy ]);
+
   });
 
 });
