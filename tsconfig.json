@@ -25,6 +25,8 @@
     "webpack",
     "jest",
     "src/setupTests.ts",
-    "__mocks__"
+    "__mocks__",
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx"
   ]
 }
