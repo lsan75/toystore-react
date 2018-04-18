@@ -1,14 +1,5 @@
-.ToyListContainer {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
+
 .ToyListComponent {
-  overflow-y: auto;
-  overflow-x: hidden;
-  transition: flex-grow 300ms ease-in-out;
-  flex-shrink: 1;
-  flex-basis: 0;
 }
 
 .ToyList__unselect {
