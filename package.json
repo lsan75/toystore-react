@@ -43,6 +43,7 @@
     "enzyme-adapter-react-16": "^1.1.1",
     "jest-enzyme": "^6.0.0",
     "jest-mock-axios": "^1.0.21",
+    "jest-mock-promise": "^1.0.23",
     "npm-run-all": "^4.1.2",
     "react-addons-test-utils": "^15.6.2",
     "react-test-renderer": "^16.3.1",

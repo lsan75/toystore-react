@@ -1,10 +1,14 @@
-.ToyListComponent {
+.ToyListContainer {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding: 1rem 1rem 0 0;
-
-  align-content: stretch;
+  flex-direction: column;
+  height: 100%;
+}
+.ToyListComponent {
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: flex-grow 300ms ease-in-out;
+  flex-shrink: 1;
+  flex-basis: 0;
 }
 
 .ToyList__unselect {
@@ -13,4 +17,5 @@
   &.mdi:before {
     padding-right: 0.5rem;
   }
+
 }

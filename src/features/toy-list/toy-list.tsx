@@ -9,17 +9,33 @@ interface Props {
   unselect: () => {};
 }
 
-export function ToyListComponent(props: Props) {
+interface State {
+  hidden: boolean;
+}
 
-  const content = props.toyList.map((toy: Toy) => {
-    return <ToyComponent key={toy.title} toy={toy} select={props.select} />;
-  });
+export class ToyListComponent extends React.Component<Props, State> {
 
-  return (
-    <main>
-      <section className="ToyListComponent">{content}</section>
-      <section className="ToyList__unselect mdi mdi-close-circle" onClick={props.unselect}>Unselect All</section>
-    </main>
-  );
+  constructor(props: Props) {
+    super(props);
+    this.state = { hidden: false };
+  }
+
+  public content = () => this.props.toyList.map((toy: Toy) => {
+    return <ToyComponent key={toy.title} toy={toy} select={this.props.select} />;
+  })
+
+  public resize = () => {
+    return this.state.hidden ? ({ flexGrow: 0 }) : ({ flexGrow: 1 });
+  }
+
+  render() {
+    return (
+      <main className="ToyListContainer">
+        <h1 style={{'paddingLeft': '1rem'}} onClick={() => this.setState({ hidden: !this.state.hidden})}>ToyList</h1>
+        <section className="ToyListComponent" style={this.resize()}>{this.content()}</section>
+        <section className="ToyList__unselect mdi mdi-close-circle" onClick={this.props.unselect}>Unselect All</section>
+      </main>
+    );
+  }
 
 }
