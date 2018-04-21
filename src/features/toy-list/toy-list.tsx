@@ -17,6 +17,10 @@ export interface State {
 
 export class ToyListComponent extends React.Component<Props, State> {
 
+  private content = ((toy: Toy) => {
+    return <ToyComponent key={toy.title} toy={toy} select={this.props.select} />;
+  });
+
   constructor(props: Props) {
     super(props);
     this.state = { open: true };
@@ -29,7 +33,7 @@ export class ToyListComponent extends React.Component<Props, State> {
         <h1 style={{'paddingLeft': '1rem'}} onClick={this.toggle}>ToyList</h1>
 
         <AnimateToggle open={open} duration={300}>
-          <section className="ToyListComponent">{this.content()}</section>
+          <section className="ToyListComponent">{this.props.toyList.map(this.content)}</section>
         </AnimateToggle>
 
         <section className="ToyList__unselect mdi mdi-close-circle" onClick={this.props.unselect}>Unselect All</section>
@@ -44,9 +48,5 @@ export class ToyListComponent extends React.Component<Props, State> {
       open: !open
     });
   }
-
-  private content = () => this.props.toyList.map((toy: Toy) => {
-    return <ToyComponent key={toy.title} toy={toy} select={this.props.select} />;
-  })
 
 }

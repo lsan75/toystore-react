@@ -10,7 +10,7 @@ export interface State {
   shouldUseTransition: boolean;
 }
 
-export default class AnimateToggle extends React.Component<Props, State> {
+export default class AnimateToggle extends React.PureComponent<Props, State> {
 
   private contentElement: HTMLDivElement | null;
   private clearTimer: NodeJS.Timer;
@@ -26,7 +26,11 @@ export default class AnimateToggle extends React.Component<Props, State> {
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    nextProps.open ? this.manageOpen() : this.manageClose();
+    nextProps.open ? this.manageOpen(nextProps.duration) : this.manageClose();
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.clearTimer);
   }
 
   render() {
@@ -48,10 +52,11 @@ export default class AnimateToggle extends React.Component<Props, State> {
     );
   }
 
-  private manageOpen = () => {
+  private manageOpen = (duration: number) => {
+    const { height } = this.state;
 
     // If open set to true and component closed, retrieve the real component height
-    if (this.state.height === this.zero) {
+    if (height === this.zero) {
       this.setHeightToRealHeight();
 
       // return because next condition is now true
@@ -60,16 +65,17 @@ export default class AnimateToggle extends React.Component<Props, State> {
     }
 
     // if open set to true and component has real height, set height to auto after duration
-    if (this.state.height !== this.auto) {
+    if (height !== this.auto) {
       clearTimeout(this.clearTimer);
-      this.clearTimer = setTimeout(this.setHeightToAuto, this.props.duration);
+      this.clearTimer = setTimeout(this.setHeightToAuto, duration);
     }
   }
 
   private manageClose = () => {
+    const { height } = this.state;
 
     // if open set to false and height set to auto, retrieve the real height
-    if (this.state.height === this.auto) {
+    if (height === this.auto) {
       this.setHeightToRealHeight();
 
       // return because next condition is now true
@@ -78,7 +84,7 @@ export default class AnimateToggle extends React.Component<Props, State> {
     }
 
     // if open set to false and height not zero, set height to 0
-    if (this.state.height !== this.zero) {
+    if (height !== this.zero) {
       this.setHeightToZero();
     }
   }
