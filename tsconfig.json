@@ -27,6 +27,7 @@
     "src/setupTests.ts",
     "__mocks__",
     "src/**/*.test.ts",
-    "src/**/*.test.tsx"
+    "src/**/*.test.tsx",
+    "src/**/*.d.ts"
   ]
 }

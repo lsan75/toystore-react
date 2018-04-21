@@ -1,16 +1,17 @@
 import * as React from 'react';
-import { ToyComponent, Toy } from './toy';
+import { Toy } from './toy';
+import ToyComponent from './toy';
 import './toy-list.css';
 import '../../../node_modules/@mdi/font/css/materialdesignicons.min.css';
 import AnimateToggle from '../../libs/animate-toggle';
 
-interface Props {
+export interface Props {
   toyList: Toy[];
   select: (toy: Toy) => {};
   unselect: () => {};
 }
 
-interface State {
+export interface State {
   open: boolean;
 }
 

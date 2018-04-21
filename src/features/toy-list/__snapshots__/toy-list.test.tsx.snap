@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ToyListComponent should render component 1`] = `
+<ToyListComponent
+  select={[MockFunction]}
+  toyList={
+    Array [
+      Object {
+        "icon": "balloon",
+        "price": 10,
+        "selected": true,
+        "title": "hop",
+      },
+    ]
+  }
+  unselect={[MockFunction]}
+>
+  <main>
+    <h1
+      onClick={[Function]}
+      style={
+        Object {
+          "paddingLeft": "1rem",
+        }
+      }
+    >
+      ToyList
+    </h1>
+    <AnimateToggle
+      duration={300}
+      open={true}
+    >
+      <section
+        style={
+          Object {
+            "height": "auto",
+            "overflow": "hidden",
+            "transition": "",
+          }
+        }
+      >
+        <div>
+          <section
+            className="ToyListComponent"
+          >
+            <ToyComponent
+              key="hop"
+              select={[MockFunction]}
+              toy={
+                Object {
+                  "icon": "balloon",
+                  "price": 10,
+                  "selected": true,
+                  "title": "hop",
+                }
+              }
+            >
+              <section
+                className="
+    ToyComponent
+    selected
+  "
+                onClick={[Function]}
+              >
+                <article
+                  className="
+    ToyComponent__image
+    mdi mdi-balloon
+  "
+                />
+                <span
+                  className="ToyComponent__text"
+                >
+                  hop
+                </span>
+              </section>
+            </ToyComponent>
+          </section>
+        </div>
+      </section>
+    </AnimateToggle>
+    <section
+      className="ToyList__unselect mdi mdi-close-circle"
+      onClick={[MockFunction]}
+    >
+      Unselect All
+    </section>
+  </main>
+</ToyListComponent>
+`;

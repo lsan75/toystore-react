@@ -14,7 +14,7 @@ interface Props {
   select: (toy: Toy) => {};
 }
 
-export function ToyComponent(props: Props) {
+export default function ToyComponent(props: Props) {
 
   const component = `
     ToyComponent
