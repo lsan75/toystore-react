@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ToyComponent, Toy } from './toy';
 import './toy-list.css';
 import '../../../node_modules/@mdi/font/css/materialdesignicons.min.css';
-import AnimateToggle from './animate-toggle.component';
+import AnimateToggle from '../../libs/animate-toggle';
 
 interface Props {
   toyList: Toy[];

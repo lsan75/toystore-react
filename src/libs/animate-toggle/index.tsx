@@ -15,18 +15,18 @@ export default class AnimateToggle extends React.Component<Props, State> {
   private contentElement: HTMLDivElement | null;
   private clearTimer: NodeJS.Timer;
   private auto: string = 'auto';
-  private zero: string = '0';
+  private zero: string = '0px';
 
   constructor(props: Props) {
     super(props);
     this.state = {
-      height: this.auto,
+      height: props.open ? this.auto : this.zero,
       shouldUseTransition: false
     };
   }
 
-  componentDidUpdate() {
-    this.props.open ? this.manageOpen() : this.manageClose();
+  componentWillReceiveProps(nextProps: Props) {
+    nextProps.open ? this.manageOpen() : this.manageClose();
   }
 
   render() {
@@ -40,11 +40,11 @@ export default class AnimateToggle extends React.Component<Props, State> {
     };
 
     return (
-      <div style={style}>
+      <section style={style}>
         <div ref={el => this.contentElement = el}>
           {children}
         </div>
-      </div>
+      </section>
     );
   }
 
@@ -55,7 +55,8 @@ export default class AnimateToggle extends React.Component<Props, State> {
       this.setHeightToRealHeight();
 
       // return because next condition is now true
-      return;
+      // forceUdpdate to reload componentWillReceiveProps
+      this.forceUpdate();
     }
 
     // if open set to true and component has real height, set height to auto after duration
@@ -72,7 +73,8 @@ export default class AnimateToggle extends React.Component<Props, State> {
       this.setHeightToRealHeight();
 
       // return because next condition is now true
-      return;
+      // forceUdpdate to reload componentWillReceiveProps
+      this.forceUpdate();
     }
 
     // if open set to false and height not zero, set height to 0
@@ -102,8 +104,11 @@ export default class AnimateToggle extends React.Component<Props, State> {
   }
 
   private setHeightToRealHeight = () => {
+
+    const height = this.contentElement ? `${this.contentElement.offsetHeight}px` : this.zero;
+
     this.setState({
-      height: this.contentElement ? `${this.contentElement.offsetHeight}px` : this.zero,
+      height,
       shouldUseTransition: true
     });
   }
