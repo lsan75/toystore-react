@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ToyComponent, Toy } from './toy';
 import './toy-list.css';
 import '../../../node_modules/@mdi/font/css/materialdesignicons.min.css';
-import AnimateHeight from 'react-animate-height';
+import AnimateToggle from './animate-toggle.component';
 
 interface Props {
   toyList: Toy[];
@@ -11,34 +11,36 @@ interface Props {
 }
 
 interface State {
-  height: number | string;
+  open: boolean;
 }
 
 export class ToyListComponent extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
-    this.state = { height: 'auto' };
+    this.state = { open: true };
   }
 
   render() {
-    const { height } = this.state;
+    const { open } = this.state;
     return (
       <main>
         <h1 style={{'paddingLeft': '1rem'}} onClick={this.toggle}>ToyList</h1>
-        <AnimateHeight height={height} duration={200}>
+
+        <AnimateToggle open={open} duration={300}>
           <section className="ToyListComponent">{this.content()}</section>
-        </AnimateHeight>
+        </AnimateToggle>
+
         <section className="ToyList__unselect mdi mdi-close-circle" onClick={this.props.unselect}>Unselect All</section>
       </main>
     );
   }
 
   private toggle = () => {
-    const { height } = this.state;
+    const { open } = this.state;
 
     this.setState({
-      height: height === 0 ? 'auto' : 0
+      open: !open
     });
   }
 
