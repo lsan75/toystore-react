@@ -26,7 +26,7 @@ export default class AnimateToggle extends React.PureComponent<Props, State> {
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    nextProps.open ? this.manageOpen(nextProps.duration) : this.manageClose()
+    nextProps.open ? this.doOpen(nextProps.duration) : this.doClose()
   }
 
   componentWillUnmount() {
@@ -52,9 +52,9 @@ export default class AnimateToggle extends React.PureComponent<Props, State> {
     )
   }
 
-  private manageOpen = (duration: number) => {
+  private doOpen = (duration: number) => {
 
-    // prevent scroll if height not to zero (duration might change)
+    // prevent scroll if height not zero (duration might change)
     if (this.state.height !== this.zero) { return }
 
     // 1. First pass
@@ -65,7 +65,7 @@ export default class AnimateToggle extends React.PureComponent<Props, State> {
     this.clearTimer = setTimeout(this.setHeightToAuto, duration)
   }
 
-  private manageClose = () => {
+  private doClose = () => {
 
     // prevent scroll if height already zero (duration might change)
     if (this.state.height === this.zero) { return }
@@ -87,7 +87,7 @@ export default class AnimateToggle extends React.PureComponent<Props, State> {
 
   private setHeightToZero = () => {
 
-    // Call RAF for smooth transition
+    // requestAnimationFrame for smooth transition needed
     requestAnimationFrame(() => {
       this.setState({
         height: this.zero,
@@ -96,11 +96,11 @@ export default class AnimateToggle extends React.PureComponent<Props, State> {
     })
   }
 
-  private setHeightToRealHeight = async (shouldUseTransition: boolean) => {
+  private setHeightToRealHeight = async (shouldUseTransition: boolean): Promise<void> => {
 
     const height = this.contentElement ? `${this.contentElement.offsetHeight}px` : this.zero
 
-    // async await needed to sync the flow for the next step
+    // async await needed to sync the flow for the next pass
     return await this.setState({
       height,
       shouldUseTransition
