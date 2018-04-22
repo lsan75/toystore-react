@@ -65,8 +65,10 @@ describe('AnimateToggle', () => {
     jest.useFakeTimers()
     reactOutput = mountWith(false)
     reactOutput.setProps({ open: true })
+
+    expect(clearTimeout).toBeCalled()
     jest.runAllTimers()
-    expect(setTimeout).toHaveBeenCalledTimes(1)
+    expect(setTimeout).toBeCalled()
 
     reactOutput.update()
     expect(reactOutput.find('section').props().style).toEqual({
@@ -96,5 +98,13 @@ describe('AnimateToggle', () => {
       transition: '',
       overflow: 'hidden'
     })
+  })
+
+  it('should unmount', () => {
+    jest.useFakeTimers()
+    reactOutput = mountWith(true)
+
+    reactOutput.unmount()
+    expect(clearTimeout).toBeCalled()
   })
 })
