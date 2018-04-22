@@ -55,16 +55,18 @@ export default class AnimateToggle extends React.PureComponent<Props, State> {
   private manageOpen = (duration: number) => {
     const { height } = this.state
 
+    // 1. First pass
     // If open set to true and component closed, retrieve the real component height
     if (height === this.zero) {
       this.setHeightToRealHeight()
 
-      // return because next condition is now true
-      // forceUdpdate to reload componentWillReceiveProps
+      // Return because next condition is now true
+      // By ForceUdpdate to reload componentWillReceiveProps
       this.forceUpdate()
     }
 
-    // if open set to true and component has real height, set height to auto after duration
+    // 2. Second pass
+    // If open set to true and component has real height, set height to auto after duration
     if (height !== this.auto) {
       clearTimeout(this.clearTimer)
       this.clearTimer = setTimeout(this.setHeightToAuto, duration)
@@ -74,16 +76,18 @@ export default class AnimateToggle extends React.PureComponent<Props, State> {
   private manageClose = () => {
     const { height } = this.state
 
-    // if open set to false and height set to auto, retrieve the real height
+    // 1. First pass
+    // If open set to false and height set to auto, retrieve the real height
     if (height === this.auto) {
       this.setHeightToRealHeight()
 
-      // return because next condition is now true
-      // forceUdpdate to reload componentWillReceiveProps
+      // Return because next condition is now true
+      // By ForceUdpdate to reload componentWillReceiveProps
       this.forceUpdate()
     }
 
-    // if open set to false and height not zero, set height to 0
+    // 2. Second pass
+    // If open set to false and height not zero, set height to 0
     if (height !== this.zero) {
       this.setHeightToZero()
     }
@@ -91,7 +95,7 @@ export default class AnimateToggle extends React.PureComponent<Props, State> {
 
   private setHeightToAuto = () => {
 
-    // prevent transition when component set from real height to auto
+    // Prevent transition when component set from real height to auto
     this.setState({
       height: this.auto,
       shouldUseTransition: false
@@ -100,7 +104,7 @@ export default class AnimateToggle extends React.PureComponent<Props, State> {
 
   private setHeightToZero = () => {
 
-    // call RAF for smooth transition
+    // Call RAF for smooth transition
     requestAnimationFrame(() => {
       this.setState({
         height: this.zero,
