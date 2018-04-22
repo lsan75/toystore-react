@@ -1,20 +1,19 @@
 import * as React from 'react'
-import { configure, mount, ReactWrapper } from 'enzyme'
+import { configure, shallow, ShallowWrapper } from 'enzyme'
 import * as Adapter from 'enzyme-adapter-react-16'
-import { mountToJson } from 'enzyme-to-json'
+import { shallowToJson } from 'enzyme-to-json'
 
-import { Props, State } from './'
-import AnimateToggle from './'
+import AnimateToggle, { Props, State } from './'
 
 describe('AnimateToggle', () => {
 
   configure({ adapter: new Adapter() })
-  let reactOutput: ReactWrapper
+  let reactOutput: ShallowWrapper
 
   const mountWith = (isOpen: boolean) => {
-    return mount<Props, State>(
+    return shallow<Props, State>(
       <AnimateToggle open={isOpen} duration={300}>
-        <div style={{height: '200px'}}>Hello</div>
+        <div>Hello</div>
       </AnimateToggle>
     )
   }
@@ -29,7 +28,7 @@ describe('AnimateToggle', () => {
 
   it('should match the snapshot', () => {
     reactOutput = mountWith(true)
-    expect(mountToJson(reactOutput)).toMatchSnapshot()
+    expect(shallowToJson(reactOutput)).toMatchSnapshot()
   })
 
   it('should have a height of auto on rendering', () => {
