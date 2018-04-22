@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { configure, mount, ReactWrapper, MountRendererProps } from 'enzyme'
+import { configure, mount, ReactWrapper } from 'enzyme'
 import * as Adapter from 'enzyme-adapter-react-16'
 import { mountToJson } from 'enzyme-to-json'
 
@@ -53,8 +53,8 @@ describe('AnimateToggle', () => {
   it('should go from open to close', () => {
     reactOutput = mountWith(true)
     reactOutput.setProps({ open: false })
-    reactOutput.update()
 
+    reactOutput.update()
     expect(reactOutput.find('section').props().style).toEqual({
       height: '0px',
       transition: 'height 300ms ease-in-out',
@@ -64,22 +64,38 @@ describe('AnimateToggle', () => {
 
   it('should go from close to open', () => {
     jest.useFakeTimers()
-
     reactOutput = mountWith(false)
     reactOutput.setProps({ open: true })
-    reactOutput.update()
-
     jest.runAllTimers()
     expect(setTimeout).toHaveBeenCalledTimes(1)
 
     reactOutput.update()
-
     expect(reactOutput.find('section').props().style).toEqual({
       height: 'auto',
       transition: '',
       overflow: 'hidden'
     })
-
   })
 
+  it('should do nothing if duration changed while openeing', () => {
+    jest.useFakeTimers()
+    reactOutput = mountWith(false)
+    reactOutput.setProps({ duration: 1000 })
+
+    jest.runAllTimers()
+    reactOutput.update()
+    expect(setTimeout).not.toHaveBeenCalled()
+  })
+
+  it('should do nothing if duration changed while closing', () => {
+    reactOutput = mountWith(true)
+    reactOutput.setProps({ duration: 1000 })
+
+    reactOutput.update()
+    expect(reactOutput.find('section').props().style).toEqual({
+      height: 'auto',
+      transition: '',
+      overflow: 'hidden'
+    })
+  })
 })

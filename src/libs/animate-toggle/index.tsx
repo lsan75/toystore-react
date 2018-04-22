@@ -53,44 +53,28 @@ export default class AnimateToggle extends React.PureComponent<Props, State> {
   }
 
   private manageOpen = (duration: number) => {
-    const { height } = this.state
+
+    // prevent scroll if height not to zero (duration might change)
+    if (this.state.height !== this.zero) { return }
 
     // 1. First pass
-    // If open set to true and component closed, retrieve the real component height
-    if (height === this.zero) {
-      this.setHeightToRealHeight(true)
-
-      // Return because next condition is now true
-      // By ForceUdpdate to reload componentWillReceiveProps
-      this.forceUpdate()
-    }
+    this.setHeightToRealHeight(true)
 
     // 2. Second pass
-    // If open set to true and component has real height, set height to auto after duration
-    if (height !== this.auto) {
-      clearTimeout(this.clearTimer)
-      this.clearTimer = setTimeout(this.setHeightToAuto, duration)
-    }
+    clearTimeout(this.clearTimer)
+    this.clearTimer = setTimeout(this.setHeightToAuto, duration)
   }
 
   private manageClose = () => {
-    const { height } = this.state
+
+    // prevent scroll if height already zero (duration might change)
+    if (this.state.height === this.zero) { return }
 
     // 1. First pass
-    // If open set to false and height set to auto, retrieve the real height
-    if (height === this.auto) {
-      this.setHeightToRealHeight(false)
-
-      // Return because next condition is now true
-      // By ForceUdpdate to reload componentWillReceiveProps
-      this.forceUpdate()
-    }
+    this.setHeightToRealHeight(false)
 
     // 2. Second pass
-    // If open set to false and height not zero, set height to 0
-    if (height !== this.zero) {
-      this.setHeightToZero()
-    }
+    this.setHeightToZero()
   }
 
   private setHeightToAuto = () => {
@@ -112,11 +96,12 @@ export default class AnimateToggle extends React.PureComponent<Props, State> {
     })
   }
 
-  private setHeightToRealHeight = (shouldUseTransition: boolean) => {
+  private setHeightToRealHeight = async (shouldUseTransition: boolean) => {
 
     const height = this.contentElement ? `${this.contentElement.offsetHeight}px` : this.zero
 
-    this.setState({
+    // async await needed to sync the flow for the next step
+    return await this.setState({
       height,
       shouldUseTransition
     })
