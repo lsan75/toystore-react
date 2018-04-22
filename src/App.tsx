@@ -1,17 +1,17 @@
-import * as React from 'react';
-import { Provider } from 'react-redux';
-import { Route, Switch } from 'react-router';
-import { Router, Redirect } from 'react-router-dom';
+import * as React from 'react'
+import { Provider } from 'react-redux'
+import { Route, Switch } from 'react-router'
+import { Router, Redirect } from 'react-router-dom'
 
-import { store } from './store/create.store';
-import * as history from 'history';
-const myHistory = history.createBrowserHistory();
+import { store } from './store/create.store'
+import * as history from 'history'
+const myHistory = history.createBrowserHistory()
 
-import HeaderContainer from './features/header/header.container';
-import BasketContainer from './features/basket/basket.container';
-import ToyListContainer from './features/toy-list/toy-list.container';
+import HeaderContainer from './features/header/header.container'
+import BasketContainer from './features/basket/basket.container'
+import ToyListContainer from './features/toy-list/toy-list.container'
 
-import './App.css';
+import './App.css'
 
 class App extends React.Component<{}> {
   render() {
@@ -37,8 +37,8 @@ class App extends React.Component<{}> {
         </Router>
 
       </Provider>
-    );
+    )
   }
 }
 
-export default App;
+export default App

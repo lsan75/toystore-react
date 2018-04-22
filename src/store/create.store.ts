@@ -1,8 +1,8 @@
-import { createStore, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import { rootReducer } from './root.reducer';
-import { defaulStore } from './root';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { createStore, applyMiddleware } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import { rootReducer } from './root.reducer'
+import { defaulStore } from './root'
+import { composeWithDevTools } from 'redux-devtools-extension'
 
 // configure redux
 export const store = createStore(
@@ -11,4 +11,4 @@ export const store = createStore(
   composeWithDevTools(applyMiddleware(
     thunkMiddleware
   ))
-);
+)

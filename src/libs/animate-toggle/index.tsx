@@ -1,47 +1,47 @@
-import * as React from 'react';
+import * as React from 'react'
 
 export interface Props {
-  open: boolean;
-  duration: number;
+  open: boolean
+  duration: number
 }
 
 export interface State {
-  height: string;
-  shouldUseTransition: boolean;
+  height: string
+  shouldUseTransition: boolean
 }
 
 export default class AnimateToggle extends React.PureComponent<Props, State> {
 
-  private contentElement: HTMLDivElement | null;
-  private clearTimer: NodeJS.Timer;
-  private auto: string = 'auto';
-  private zero: string = '0px';
+  private contentElement: HTMLDivElement | null
+  private clearTimer: NodeJS.Timer
+  private auto: string = 'auto'
+  private zero: string = '0px'
 
   constructor(props: Props) {
-    super(props);
+    super(props)
     this.state = {
       height: props.open ? this.auto : this.zero,
       shouldUseTransition: false
-    };
+    }
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    nextProps.open ? this.manageOpen(nextProps.duration) : this.manageClose();
+    nextProps.open ? this.manageOpen(nextProps.duration) : this.manageClose()
   }
 
   componentWillUnmount() {
-    clearTimeout(this.clearTimer);
+    clearTimeout(this.clearTimer)
   }
 
   render() {
-    const { duration, children } = this.props;
-    const { height, shouldUseTransition } = this.state;
+    const { duration, children } = this.props
+    const { height, shouldUseTransition } = this.state
 
     const style: React.CSSProperties = {
       height,
       transition: shouldUseTransition ? `height ${duration}ms ease-in-out` : '',
       overflow: 'hidden'
-    };
+    }
 
     return (
       <section style={style}>
@@ -49,43 +49,43 @@ export default class AnimateToggle extends React.PureComponent<Props, State> {
           {children}
         </div>
       </section>
-    );
+    )
   }
 
   private manageOpen = (duration: number) => {
-    const { height } = this.state;
+    const { height } = this.state
 
     // If open set to true and component closed, retrieve the real component height
     if (height === this.zero) {
-      this.setHeightToRealHeight();
+      this.setHeightToRealHeight()
 
       // return because next condition is now true
       // forceUdpdate to reload componentWillReceiveProps
-      this.forceUpdate();
+      this.forceUpdate()
     }
 
     // if open set to true and component has real height, set height to auto after duration
     if (height !== this.auto) {
-      clearTimeout(this.clearTimer);
-      this.clearTimer = setTimeout(this.setHeightToAuto, duration);
+      clearTimeout(this.clearTimer)
+      this.clearTimer = setTimeout(this.setHeightToAuto, duration)
     }
   }
 
   private manageClose = () => {
-    const { height } = this.state;
+    const { height } = this.state
 
     // if open set to false and height set to auto, retrieve the real height
     if (height === this.auto) {
-      this.setHeightToRealHeight();
+      this.setHeightToRealHeight()
 
       // return because next condition is now true
       // forceUdpdate to reload componentWillReceiveProps
-      this.forceUpdate();
+      this.forceUpdate()
     }
 
     // if open set to false and height not zero, set height to 0
     if (height !== this.zero) {
-      this.setHeightToZero();
+      this.setHeightToZero()
     }
   }
 
@@ -95,7 +95,7 @@ export default class AnimateToggle extends React.PureComponent<Props, State> {
     this.setState({
       height: this.auto,
       shouldUseTransition: false
-    });
+    })
   }
 
   private setHeightToZero = () => {
@@ -105,17 +105,17 @@ export default class AnimateToggle extends React.PureComponent<Props, State> {
       this.setState({
         height: this.zero,
         shouldUseTransition: true
-      });
-    });
+      })
+    })
   }
 
   private setHeightToRealHeight = () => {
 
-    const height = this.contentElement ? `${this.contentElement.offsetHeight}px` : this.zero;
+    const height = this.contentElement ? `${this.contentElement.offsetHeight}px` : this.zero
 
     this.setState({
       height,
       shouldUseTransition: true
-    });
+    })
   }
 }

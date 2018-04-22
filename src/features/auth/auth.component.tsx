@@ -1,30 +1,30 @@
-import * as React from 'react';
-import './auth.component.css';
+import * as React from 'react'
+import './auth.component.css'
 
 interface Props {
-  isOpened: boolean;
-  isError: boolean;
-  submit: (user: UserState) => void;
+  isOpened: boolean
+  isError: boolean
+  submit: (user: UserState) => void
 }
 
 export interface UserState {
-  user: string;
-  pass: string;
+  user: string
+  pass: string
 }
 
 export class AuthComponent extends React.Component<Props, UserState> {
 
   constructor(props: Props) {
-    super(props);
+    super(props)
     this.state = {
       user: '',
       pass: ''
-    };
+    }
   }
 
   render() {
 
-    const klass = this.props.isOpened ? 'opened' : '';
+    const klass = this.props.isOpened ? 'opened' : ''
 
     return (
       <div className={`AuthComponent ${klass}`}>
@@ -60,26 +60,26 @@ export class AuthComponent extends React.Component<Props, UserState> {
 
         </form>
       </div>
-    );
+    )
   }
 
   private handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    this.props.submit(this.state);
+    e.preventDefault()
+    this.props.submit(this.state)
   }
 
   private handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     switch (event.target.id) {
       case 'user':
-        this.setState({user: event.target.value});
-        break;
+        this.setState({user: event.target.value})
+        break
 
       case 'pass':
-        this.setState({pass: event.target.value});
-        break;
+        this.setState({pass: event.target.value})
+        break
 
       default:
-        return;
+        return
     }
   }
 

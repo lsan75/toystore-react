@@ -1,26 +1,26 @@
-import * as React from 'react';
-import { ToyListComponent } from './toy-list';
-import { Toy } from './toy';
-import { connect, Dispatch } from 'react-redux';
-import { Store } from '../../store/root';
-import { selectToyAction, getToysAction, unselectAllAction } from '../../store/toy/toy.action';
-import { ToyAction } from '../../store/toy/toy.reducer';
+import * as React from 'react'
+import { ToyListComponent } from './toy-list'
+import { Toy } from './toy'
+import { connect, Dispatch } from 'react-redux'
+import { Store } from '../../store/root'
+import { selectToyAction, getToysAction, unselectAllAction } from '../../store/toy/toy.action'
+import { ToyAction } from '../../store/toy/toy.reducer'
 
 export interface Props {
-  toyList: Toy[];
-  select: (toy: Toy) => ToyAction;
-  getToys: () => ToyAction;
-  unselect: () => ToyAction;
+  toyList: Toy[]
+  select: (toy: Toy) => ToyAction
+  getToys: () => ToyAction
+  unselect: () => ToyAction
 }
 
 export class ToyListContainer extends React.Component<Props> {
 
   constructor(props: Props) {
-    super(props);
+    super(props)
   }
 
   componentDidMount() {
-    this.props.getToys();
+    this.props.getToys()
   }
 
   render() {
@@ -30,7 +30,7 @@ export class ToyListContainer extends React.Component<Props> {
         unselect={this.props.unselect}
         toyList={this.props.toyList}
       />
-    );
+    )
   }
 
 }
@@ -38,7 +38,7 @@ export class ToyListContainer extends React.Component<Props> {
 function mapStateToProps(state: Store) {
   return {
     toyList: state.toyReducer.toyList
-  };
+  }
 }
 
 function mapDispatchToProps(dispatch: Dispatch<Props>) {
@@ -46,10 +46,10 @@ function mapDispatchToProps(dispatch: Dispatch<Props>) {
     select: (toy: Toy) => dispatch( selectToyAction(toy) ),
     getToys: () => dispatch( getToysAction() ),
     unselect: () => dispatch( unselectAllAction() )
-  };
+  }
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ToyListContainer);
+)(ToyListContainer)

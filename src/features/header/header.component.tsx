@@ -1,21 +1,21 @@
-import * as React from 'react';
-import { Link } from 'react-router-dom';
-import { HeaderLink } from './header-link.component';
-import { AuthComponent, UserState } from '../auth/auth.component';
+import * as React from 'react'
+import { Link } from 'react-router-dom'
+import { HeaderLink } from './header-link.component'
+import { AuthComponent, UserState } from '../auth/auth.component'
 
 interface HeaderLinkProps {
-  click: () => void;
-  submit: (user: UserState) => void;
-  isConnected: boolean;
-  isOpened: boolean;
-  isError: boolean;
-  counter: number;
+  click: () => void
+  submit: (user: UserState) => void
+  isConnected: boolean
+  isOpened: boolean
+  isError: boolean
+  counter: number
 }
 
 export function HeaderComponent(props: HeaderLinkProps) {
 
-  const isS = () => props.counter > 1 ? 's' : '';
-  const content = `Basket | ${props.counter} item${isS()}`;
+  const isS = () => props.counter > 1 ? 's' : ''
+  const content = `Basket | ${props.counter} item${isS()}`
 
   return (
     <header className="Header">
@@ -36,6 +36,6 @@ export function HeaderComponent(props: HeaderLinkProps) {
         submit={props.submit}
       />
     </header>
-  );
+  )
 
 }
