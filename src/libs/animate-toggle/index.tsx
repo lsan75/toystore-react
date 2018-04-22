@@ -58,7 +58,7 @@ export default class AnimateToggle extends React.PureComponent<Props, State> {
     // 1. First pass
     // If open set to true and component closed, retrieve the real component height
     if (height === this.zero) {
-      this.setHeightToRealHeight()
+      this.setHeightToRealHeight(true)
 
       // Return because next condition is now true
       // By ForceUdpdate to reload componentWillReceiveProps
@@ -79,7 +79,7 @@ export default class AnimateToggle extends React.PureComponent<Props, State> {
     // 1. First pass
     // If open set to false and height set to auto, retrieve the real height
     if (height === this.auto) {
-      this.setHeightToRealHeight()
+      this.setHeightToRealHeight(false)
 
       // Return because next condition is now true
       // By ForceUdpdate to reload componentWillReceiveProps
@@ -95,7 +95,6 @@ export default class AnimateToggle extends React.PureComponent<Props, State> {
 
   private setHeightToAuto = () => {
 
-    // Prevent transition when component set from real height to auto
     this.setState({
       height: this.auto,
       shouldUseTransition: false
@@ -113,13 +112,13 @@ export default class AnimateToggle extends React.PureComponent<Props, State> {
     })
   }
 
-  private setHeightToRealHeight = () => {
+  private setHeightToRealHeight = (shouldUseTransition: boolean) => {
 
     const height = this.contentElement ? `${this.contentElement.offsetHeight}px` : this.zero
 
     this.setState({
       height,
-      shouldUseTransition: true
+      shouldUseTransition
     })
   }
 }

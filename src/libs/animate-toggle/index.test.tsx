@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { configure, mount, ReactWrapper } from 'enzyme'
+import { configure, mount, ReactWrapper, MountRendererProps } from 'enzyme'
 import * as Adapter from 'enzyme-adapter-react-16'
 import { mountToJson } from 'enzyme-to-json'
 
@@ -71,6 +71,7 @@ describe('AnimateToggle', () => {
 
     jest.runAllTimers()
     expect(setTimeout).toHaveBeenCalledTimes(1)
+
     reactOutput.update()
 
     expect(reactOutput.find('section').props().style).toEqual({
