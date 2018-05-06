@@ -1,7 +1,7 @@
 import * as React from 'react'
 import './auth.component.css'
 
-interface Props {
+export interface Props {
   isOpened: boolean
   isError: boolean
   submit: (user: UserState) => void
@@ -69,6 +69,7 @@ export class AuthComponent extends React.Component<Props, UserState> {
   }
 
   private handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+
     switch (event.target.id) {
       case 'user':
         this.setState({user: event.target.value})

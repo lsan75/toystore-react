@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthComponent renders without crashing 1`] = `
+<AuthComponent
+  isError={false}
+  isOpened={true}
+  submit={[MockFunction]}
+>
+  <div
+    className="AuthComponent opened"
+  >
+    <form
+      className="AuthForm"
+      onSubmit={[Function]}
+    >
+      <h2
+        className="AuthTitle"
+      >
+        Please Login
+      </h2>
+      <section
+        className="AuthSection"
+      >
+        <label
+          className="AuthLabel"
+          htmlFor="user"
+        >
+          Your Email
+        </label>
+        <input
+          className="AuthInput"
+          id="user"
+          onChange={[Function]}
+          type="email"
+          value=""
+        />
+      </section>
+      <section
+        className="AuthSection"
+      >
+        <label
+          className="AuthLabel"
+          htmlFor="pass"
+        >
+          Your Password
+        </label>
+        <input
+          className="AuthInput"
+          id="pass"
+          onChange={[Function]}
+          type="password"
+          value=""
+        />
+      </section>
+      <section
+        className="AuthSectionButton"
+      >
+        <input
+          className="AuthButton"
+          type="submit"
+          value="Submit"
+        />
+      </section>
+    </form>
+  </div>
+</AuthComponent>
+`;

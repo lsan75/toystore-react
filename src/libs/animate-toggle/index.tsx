@@ -57,10 +57,8 @@ export default class AnimateToggle extends React.PureComponent<Props, State> {
     // prevent scroll if height not zero (duration might change)
     if (this.state.height !== this.zero) { return }
 
-    // 1. First pass
     this.setHeightToRealHeight(true)
 
-    // 2. Second pass
     clearTimeout(this.clearTimer)
     this.clearTimer = setTimeout(this.setHeightToAuto, duration)
   }
@@ -70,10 +68,7 @@ export default class AnimateToggle extends React.PureComponent<Props, State> {
     // prevent scroll if height already zero (duration might change)
     if (this.state.height === this.zero) { return }
 
-    // 1. First pass
     this.setHeightToRealHeight(false)
-
-    // 2. Second pass
     this.setHeightToZero()
   }
 
@@ -96,12 +91,11 @@ export default class AnimateToggle extends React.PureComponent<Props, State> {
     })
   }
 
-  private setHeightToRealHeight = async (shouldUseTransition: boolean): Promise<void> => {
+  private setHeightToRealHeight = (shouldUseTransition: boolean) => {
 
     const height = this.contentElement ? `${this.contentElement.offsetHeight}px` : this.zero
 
-    // async await needed to sync the flow for the next pass
-    return await this.setState({
+    this.setState({
       height,
       shouldUseTransition
     })
