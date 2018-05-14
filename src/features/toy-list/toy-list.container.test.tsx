@@ -1,13 +1,13 @@
 
 import * as React from 'react'
+import * as Redux from 'redux'
 import { configure, shallow, mount, ShallowRendererProps, ShallowWrapper, ReactWrapper } from 'enzyme'
 import * as Adapter from 'enzyme-adapter-react-16'
 import { shallowToJson } from 'enzyme-to-json'
 import ConnectedContainer, { Props } from './toy-list.container'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
-import { MockStore, MockStoreCreator } from 'redux-mock-store'
-import * as configureStore from 'redux-mock-store'
+import * as createMockStore from 'redux-mock-store'
 import { Toy } from './toy'
 import { Store } from '../../store/root'
 import mockAxios from 'jest-mock-axios'
@@ -26,8 +26,9 @@ describe('ToyListContainer', () => {
     price: 10
   }
 
-  const mockStore: MockStoreCreator<Store> = configureStore<Store>([ thunk ])
-  const store: MockStore<Store> = mockStore({
+  const middleware: Redux.Middleware[] = [ thunk ]
+  const mockStore = createMockStore(middleware)
+  const store = mockStore({
     toyReducer: {
       toyList: [ toy ],
       counter: 0
@@ -38,7 +39,7 @@ describe('ToyListContainer', () => {
       isError: false
     }
   })
-  const emptyStore: MockStore<Store> = mockStore({
+  const emptyStore = mockStore({
     toyReducer: {
       toyList: [],
       counter: 0
@@ -73,7 +74,10 @@ describe('ToyListContainer', () => {
     )
   })
 
-  afterEach(() => store.clearActions())
+  afterEach(() => {
+    store.clearActions()
+    mockAxios.reset()
+  })
 
   it('renders without crashing', () => {
     const innerProps: Props = shallowOutput.props()

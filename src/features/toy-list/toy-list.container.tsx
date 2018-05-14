@@ -3,7 +3,7 @@ import { ToyListComponent } from './toy-list'
 import { Toy } from './toy'
 import { connect, Dispatch } from 'react-redux'
 import { Store } from '../../store/root'
-import { selectToyAction, getToysAction, unselectAllAction } from '../../store/toy/toy.action'
+import * as ToyActions from '../../store/toy/toy.action'
 import { ToyAction } from '../../store/toy/toy.reducer'
 
 export interface Props {
@@ -43,9 +43,9 @@ function mapStateToProps(state: Store) {
 
 function mapDispatchToProps(dispatch: Dispatch<Props>) {
   return {
-    select: (toy: Toy) => dispatch( selectToyAction(toy) ),
-    getToys: () => dispatch( getToysAction() ),
-    unselect: () => dispatch( unselectAllAction() )
+    select: (toy: Toy) => dispatch( ToyActions.selectToyAction(toy) ),
+    getToys: () => dispatch( ToyActions.getToysAction() ),
+    unselect: () => dispatch( ToyActions.unselectAllAction() )
   }
 }
 

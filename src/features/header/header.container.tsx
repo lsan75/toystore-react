@@ -4,13 +4,13 @@ import { connect } from 'react-redux'
 import { Store } from '../../store/root'
 import { HeaderComponent } from './header.component'
 import { Action, Dispatch } from 'redux'
-import { openAuthAction, submitAuthAction } from '../../store/auth/auth.action'
+import authActionModule from '../../store/auth/auth.action'
 import { UserState } from '../auth/auth.component'
 import { AuthAction } from '../../store/auth/auth.reducer'
 
 import * as history from 'history'
 
-interface Props {
+export interface Props {
   counter: number
   isConnected: boolean
   isOpened: boolean
@@ -64,8 +64,8 @@ function mapStateToProps(state: Store) {
 
 function mapDispatchToProps(dispatch: Dispatch<Props>) {
   return {
-    openAuth: () => dispatch( openAuthAction() ),
-    submitAuth: (user: UserState) => dispatch( submitAuthAction(user) )
+    openAuth: () => dispatch( authActionModule.openAuthAction() ),
+    submitAuth: (user: UserState) => dispatch( authActionModule.submitAuthAction(user) )
   }
 }
 

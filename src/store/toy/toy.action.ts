@@ -22,7 +22,7 @@ export function getToysAction() {
   }
 }
 
-export function loadToysAction(toyList: Toy[]) {
+export function loadToysAction(toyList: Toy[]): ToyAction {
   return {
     type: TOYS.GET_TOYS,
     toyList

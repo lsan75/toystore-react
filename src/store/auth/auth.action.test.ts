@@ -1,5 +1,5 @@
-import * as authActions from './auth.action'
-import { AUTH } from './auth.action'
+
+import authActionModule, { AUTH } from './auth.action'
 
 import mockAxios from 'jest-mock-axios'
 
@@ -10,45 +10,49 @@ describe('authActions', () => {
   afterEach(() => mockAxios.reset())
 
   it('should connect', () => {
-    const result = authActions.authConnectAction()
+    const result = authActionModule.authConnectAction()
     expect(result).toEqual({
       type: AUTH.SET_CONNECTED
     })
   })
 
   it('should open', () => {
-    const result = authActions.openAuthAction()
+    const result = authActionModule.openAuthAction()
     expect(result).toEqual({
       type: AUTH.OPEN
     })
   })
 
   it('should set error', () => {
-    const result = authActions.setError(true)
+    const result = authActionModule.setError(true)
     expect(result).toEqual({
       type: AUTH.SET_ERROR,
       payload: true
     })
   })
 
-  it('should submit auth and get data', () => {
+  it.only('should submit auth and get data', () => {
 
-    authActions.submitAuthAction({
+    authActionModule.authConnectAction = jest.fn(() => true)
+
+    const params = {
       user: 'toto',
       pass: 'tutu'
-    })(dispatch)
+    }
+    authActionModule.submitAuthAction(params)(dispatch)
 
     mockAxios.mockResponse({ data: [ 1 ] })
 
     expect(mockAxios.get).toBeCalledWith('/users?user=toto&pass=tutu')
-    expect(dispatch).toBeCalledWith( authActions.authConnectAction() )
-    expect(dispatch).toBeCalledWith( authActions.openAuthAction() )
+    expect(dispatch).toBeCalledWith( authActionModule.authConnectAction() )
+    expect(dispatch).toBeCalledWith( authActionModule.openAuthAction() )
 
+    expect(authActionModule.authConnectAction).toBeCalled()
   })
 
   it('should submit auth and get no data', () => {
 
-    authActions.submitAuthAction({
+    authActionModule.submitAuthAction({
       user: 'toto',
       pass: 'tutu'
     })(dispatch)
@@ -56,7 +60,8 @@ describe('authActions', () => {
     mockAxios.mockResponse({ data: [] })
 
     expect(mockAxios.get).toBeCalledWith('/users?user=toto&pass=tutu')
-    expect(dispatch).toBeCalledWith( authActions.setError(true) )
+    expect(dispatch).toBeCalledWith( authActionModule.setError(true) )
 
   })
+
 })
